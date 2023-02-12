@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
-import { LoginUserDto } from './dto/login-user.dto';
+import { User } from 'src/users/entities/user.entity';
 
 import * as bcrypt from 'bcrypt';
 
@@ -27,7 +27,9 @@ export class AuthService {
       phonenumber,
     };
 
-    return this.usersService.createUser(userValue);
+    const result = await this.usersService.createUser(userValue);
+
+    return { id: result.id, email, phonenumber, username };
   }
 
   private async hashPassword(password: string, salt: string): Promise<string> {
@@ -40,11 +42,11 @@ export class AuthService {
     return user;
   }
 
-  async login(loginUserDto: LoginUserDto) {
+  async login(loginUser: User) {
     const payload = {
-      id: loginUserDto.id,
-      email: loginUserDto.email,
-      username: loginUserDto.username,
+      id: loginUser.id,
+      email: loginUser.email,
+      username: loginUser.username,
     };
     return {
       access_token: this.jwtService.sign(payload),
