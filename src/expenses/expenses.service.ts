@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateExpenseDto } from './dto/create-expense.dto';
 import { UpdateExpenseDto } from './dto/update-expense.dto';
@@ -11,8 +11,13 @@ export class ExpensesService {
     private expenseModel: typeof Expense,
   ) {}
 
-  create(createExpenseDto: CreateExpenseDto) {
-    return this.expenseModel.create(createExpenseDto as any);
+  create(createExpenseDto: CreateExpenseDto, ownerId: string) {
+    const payload = {
+      ...createExpenseDto,
+      ownerId: ownerId,
+    };
+
+    return this.expenseModel.create(payload);
   }
 
   findAll() {
@@ -23,15 +28,27 @@ export class ExpensesService {
     return this.expenseModel.findByPk(id);
   }
 
-  update(id: number, updateExpenseDto: UpdateExpenseDto) {
-    return this.expenseModel.update(updateExpenseDto, {
+  async update(id: number, updateExpenseDto: UpdateExpenseDto) {
+    const [affectedCount] = await this.expenseModel.update(updateExpenseDto, {
       where: {
         id,
       },
     });
+
+    if (affectedCount === 0) {
+      throw new NotFoundException();
+    }
+
+    return this.expenseModel.findByPk(id);
   }
 
-  remove(id: number) {
-    return this.expenseModel.destroy({ where: { id } });
+  async remove(id: number) {
+    const affectedCount = await this.expenseModel.destroy({ where: { id } });
+
+    if (affectedCount === 0) {
+      throw new NotFoundException();
+    }
+
+    return 'Record deleted successfully.';
   }
 }

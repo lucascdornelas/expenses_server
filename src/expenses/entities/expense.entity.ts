@@ -1,4 +1,5 @@
-import { Table, Column, Model } from 'sequelize-typescript';
+import { Table, Column, Model, ForeignKey } from 'sequelize-typescript';
+import { User } from 'src/users/entities/user.entity';
 
 @Table({
   tableName: 'expenses',
@@ -10,7 +11,8 @@ export class Expense extends Model {
   @Column
   date: Date;
 
-  @Column
+  @ForeignKey(() => User)
+  @Column({ field: 'USER_ID' })
   ownerId: string;
 
   @Column
