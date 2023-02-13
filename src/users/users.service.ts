@@ -23,8 +23,6 @@ export class UsersService {
 
     const user = await this.userModel.findOne({ where: { email } });
 
-    console.log('validateLogin', email, password);
-
     const isValidPassword = await user.validatePassword(password);
 
     if (!isValidPassword) {
