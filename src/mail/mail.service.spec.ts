@@ -15,4 +15,20 @@ describe('MailService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should send an email', async () => {
+    const spy = jest.spyOn(console, 'log');
+
+    await service.sendEmail(
+      'lucascdornelas@gmail.com',
+      'Despesa Cadastrada',
+      `Despesa Cadastrada`,
+    );
+
+    expect(spy).toHaveBeenCalledWith(
+      'Email sent to lucascdornelas@gmail.com with subject "Despesa Cadastrada" and text "Despesa Cadastrada"',
+    );
+
+    spy.mockRestore();
+  });
 });
