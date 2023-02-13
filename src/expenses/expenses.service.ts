@@ -70,21 +70,21 @@ export class ExpensesService {
       throw new NotFoundException();
     }
 
-    return this.expenseModel.findByPk(id);
+    return this.expenseModel.findOne({ where: { id } });
   }
 
   async remove(id: number, user: OwnerExpenseDto) {
     const expense = await this.expenseModel.findOne({ where: { id } });
 
+    if (!expense) {
+      throw new NotFoundException();
+    }
+
     if (expense.ownerId != user.id) {
       throw new UnauthorizedException();
     }
 
-    const affectedCount = await this.expenseModel.destroy({ where: { id } });
-
-    if (affectedCount === 0) {
-      throw new NotFoundException();
-    }
+    await this.expenseModel.destroy({ where: { id } });
 
     return 'Record deleted successfully.';
   }
