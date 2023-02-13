@@ -27,36 +27,38 @@ export class ExpensesController {
     @Body() createExpenseDto: CreateExpenseDto,
     @Req() req: { user: OwnerExpenseDto },
   ) {
-    const userId = req.user.id;
-
-    return this.expensesService.create(createExpenseDto, userId);
+    return this.expensesService.create(createExpenseDto, req.user);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
-  findAll() {
-    return this.expensesService.findAll();
+  findAll(@Req() req: { user: OwnerExpenseDto }) {
+    return this.expensesService.findAll(req.user);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.expensesService.findOne(+id);
+  findOne(@Param('id') id: string, @Req() req: { user: OwnerExpenseDto }) {
+    return this.expensesService.findOne(+id, req.user);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateExpenseDto: UpdateExpenseDto) {
-    return this.expensesService.update(+id, updateExpenseDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateExpenseDto: UpdateExpenseDto,
+    @Req() req: { user: OwnerExpenseDto },
+  ) {
+    return this.expensesService.update(+id, updateExpenseDto, req.user);
   }
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.expensesService.remove(+id);
+  remove(@Param('id') id: string, @Req() req: { user: OwnerExpenseDto }) {
+    return this.expensesService.remove(+id, req.user);
   }
 }
