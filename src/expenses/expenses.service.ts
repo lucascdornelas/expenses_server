@@ -74,7 +74,6 @@ export class ExpensesService {
   }
 
   async remove(id: number, user: OwnerExpenseDto) {
-
     const expense = await this.expenseModel.findOne({ where: { id } });
 
     if (expense.ownerId != user.id) {
