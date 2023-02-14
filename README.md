@@ -2,37 +2,50 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# OnFly Test Technical
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Este é um projeto de teste técnico da OnFly, desenvolvido com NestJS.
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Características do Projeto
 
-## Installation
+- Node.js
+- Typescript
+- ORM: **Sequelize**
+- Banco de Dados: **SQLite**
+- Jest
+
+
+## Testando a API com Swagger:
+
+A API possui uma documentação interativa feita com o Swagger, que permite que você teste os endpoints sem a necessidade de escrever código ou usar ferramentas externas. Para acessá-lo, basta ir até a URL http://localhost:3000/api no seu navegador.
+
+O Swagger irá exibir todos os endpoints disponíveis na API, incluindo a descrição de cada um, quais parâmetros devem ser enviados e o tipo de retorno esperado. Para testar um endpoint, basta clicar na sua descrição, preencher os parâmetros necessários (se houver) e clicar em "Try it out". O Swagger irá fazer uma chamada para o endpoint e exibir a resposta na tela.
+
+
+## Protegendo a API com JWT:
+
+A API está protegida com o uso de Tokens JWT (JSON Web Tokens). Isso significa que a maioria dos endpoints só poderá ser acessada com um token válido, que deve ser enviado no cabeçalho da requisição com a chave `Authorization` e o valor `<access_token>`.
+
+Para obter um token, você deve fazer uma chamada para o endpoint de autenticação, passando as credenciais corretas (normalmente, email e senha). Em resposta, você receberá um token, que deve ser usado nas requisições subsequentes.
+
+Importante lembrar que os tokens possuem uma data de expiração de duração 1 hora, então você precisará obter um novo token após a expiração do anterior.
+
+
+# Scripts
+
+## Instalação
+
+```bash
+git clone https://github.com/lucascdornelas/onfly-technical-test.git
+```
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+
+## Rodando a aplicação
 
 ```bash
 # development
@@ -45,29 +58,18 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+
+## Teste
 
 ```bash
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
+# License
 
 Nest is [MIT licensed](LICENSE).
