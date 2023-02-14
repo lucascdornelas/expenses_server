@@ -27,9 +27,11 @@ O Swagger irá exibir todos os endpoints disponíveis na API, incluindo a descri
 
 A API está protegida com o uso de Tokens JWT (JSON Web Tokens). Isso significa que a maioria dos endpoints só poderá ser acessada com um token válido, que deve ser enviado no cabeçalho da requisição com a chave `Authorization` e o valor `<access_token>`.
 
-Para obter um token, você deve fazer uma chamada para o endpoint de autenticação, passando as credenciais corretas (normalmente, email e senha). Em resposta, você receberá um token, que deve ser usado nas requisições subsequentes.
+Para obter um token, você deve fazer uma chamada para o endpoint de autenticação, passando as credenciais corretas (email e senha). Em resposta, você receberá um token, que deve ser usado nas requisições subsequentes.
 
-Importante lembrar que os tokens possuem uma data de expiração de duração 1 hora, então você precisará obter um novo token após a expiração do anterior.
+Importante lembrar que:
+- Usuário deve ser registrado antes de solicitar um token.
+- Tokens possuem uma data de expiração de duração 1 hora, então você precisará obter um novo token após a expiração do anterior.
 
 
 # Scripts
