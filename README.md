@@ -2,9 +2,9 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-# OnFly Test Technical
+# Expenses Server
 
-Este é um projeto de teste técnico da OnFly, desenvolvido com NestJS.
+Este é um projeto consistem em criar uma api rest em node.js utilizando o framework nestjs. A api possui autenticação de usuário e um 'CRUD' da entidade despesas.
 
 
 ## Características do Projeto
